@@ -125,3 +125,9 @@ void	Vector::sub(Vector const &toSub)
 			_values[i] -= toSubValues[i];
 	}
 }
+
+void	Vector::scale(float const &scalar)
+{
+	for (std::vector<float>::iterator it = _values.begin(); it != _values.end(); it++)
+		*it *= scalar;
+}
