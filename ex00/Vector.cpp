@@ -48,6 +48,13 @@ bool	Vector::isNull() const
 	return (std::all_of(_values.begin(), _values.end(), [](float x){return x == 0;}));
 }
 
+bool	Vector::isId() const
+{
+	if(_values.size() == 0)
+		return false;
+	return (std::all_of(_values.begin(), _values.end(), [](float x){return x == 1;}));
+}
+
 /*os overloard*/
 
 std::ostream	&operator<<(std::ostream &os, Vector const &toPrint)

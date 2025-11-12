@@ -20,11 +20,12 @@ class Vector
 		
 		//Matrix		const &getAsMatrix() const;
 
-		bool isNull() const;
+		bool	isNull() const;
+		bool	isId() const;
 
-		void add(Vector const &toAdd);
-		void sub(Vector const &toSub);
-		void scale(float const &scalar);
+		void	add(Vector const &toAdd);
+		void	sub(Vector const &toSub);
+		void	scale(float const &scalar);
 
 
 	private:
