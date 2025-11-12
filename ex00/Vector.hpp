@@ -16,6 +16,8 @@ class Vector
 
 		std::vector<float>	const &getValues() const;
 		
+		Vector	getOppositeVector() const;
+
 		size_t	size() const;
 		
 		//Matrix		const &getAsMatrix() const;
@@ -23,6 +25,7 @@ class Vector
 		bool	isNull() const;
 		bool	isId() const;
 
+		void	opposite(void);
 		void	add(Vector const &toAdd);
 		void	sub(Vector const &toSub);
 		void	scale(float const &scalar);

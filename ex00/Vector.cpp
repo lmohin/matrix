@@ -36,6 +36,14 @@ std::vector<float>	const &Vector::getValues() const
 	return _values;
 }
 
+Vector	Vector::getOppositeVector() const
+{
+	Vector oppositeVector(*this);
+	
+	oppositeVector.opposite();
+	return (oppositeVector);
+}
+
 size_t	Vector::size() const
 {
 	return _values.size();
@@ -73,8 +81,45 @@ std::ostream	&operator<<(std::ostream &os, Vector const &toPrint)
 
 /*Calculus*/
 
-/*void	Vector::add(Vector const &toAdd)
+void	Vector::opposite(void)
 {
-	if isNull()
+	for (std::vector<float>::iterator it = _values.begin(); it != _values.end(); it++)
+		*it *= -1;
+}
+
+void	Vector::add(Vector const &toAdd)
+{
+	size_t	mySize = this->size();
+
+	if (mySize == 0)
+		_values = toAdd.getValues();
+	else if (toAdd.size() == 0)
+		return;
+	else if (mySize != toAdd.size())
+		std::cout << "Error\nYou can not sum " << *this << " and " << toAdd << " : vectors must have the same size to be added" << std::endl;
+	else
+	{
+		std::vector<float> toAddValues = toAdd.getValues();
+		for (size_t i = 0; i != mySize; i++)
+			_values[i] += toAddValues[i];
+	}
+}
+/*
+void	Vector::sub(Vector const &toSub)
+{
+	size_t	mySize = this->size();
+	if (mySize == 0)
+	{
+		_values = toSub.getValues();
 		
+	else if (toAdd->size() == 0)
+		return;
+	else if (mySize != toAdd->size())
+		std::cout << "Error\nYou can not sum " << *this << " and " << toAdd " : vectors must have the same size to be added" << std::endl;
+	else
+	{
+		toAddValues = toAdd.getValues();
+		for (i = 0; i++; i != mySize)
+			_values[i] += toAddValues[i];
+	}
 }*/
