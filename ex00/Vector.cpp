@@ -1,4 +1,7 @@
 #include "Vector.hpp"
+#include <algorithm>
+
+/*Constructors*/
 
 Vector::Vector(void)
 {
@@ -11,16 +14,22 @@ Vector::Vector(Vector const &toCopy)
 	return;
 }
 
+/*Copy overload*/
+
 Vector::Vector(std::vector<float> const &toStock)
 : _values(toStock)
 {
 	return;
 }
 
+/*Destructor*/
+
 Vector::~Vector(void)
 {
 	return;
 }
+
+/*Getters*/
 
 std::vector<float>	const &Vector::getValues() const
 {
@@ -31,6 +40,15 @@ size_t	Vector::size() const
 {
 	return _values.size();
 }
+
+bool	Vector::isNull() const
+{
+	if (_values.size() == 0)
+		return true;
+	return (std::all_of(_values.begin(), _values.end(), [](float x){return x == 0;}));
+}
+
+/*os overloard*/
 
 std::ostream	&operator<<(std::ostream &os, Vector const &toPrint)
 {
@@ -45,3 +63,11 @@ std::ostream	&operator<<(std::ostream &os, Vector const &toPrint)
 	os << ")";
 	return os;
 }
+
+/*Calculus*/
+
+/*void	Vector::add(Vector const &toAdd)
+{
+	if isNull()
+		
+}*/

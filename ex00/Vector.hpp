@@ -20,7 +20,12 @@ class Vector
 		
 		//Matrix		const &getAsMatrix() const;
 
-		bool isNull();
+		bool isNull() const;
+
+		void add(Vector const &toAdd);
+		void sub(Vector const &toSub);
+		void scale(float const &scalar);
+
 
 	private:
 		std::vector<float> _values;
