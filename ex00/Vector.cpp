@@ -96,30 +96,32 @@ void	Vector::add(Vector const &toAdd)
 	else if (toAdd.size() == 0)
 		return;
 	else if (mySize != toAdd.size())
-		std::cout << "Error\nYou can not sum " << *this << " and " << toAdd << " : vectors must have the same size to be added" << std::endl;
+		std::cout << "Error\nYou can not sum " << *this << " and " << toAdd << " : vectors must be of the same size" << std::endl;
 	else
 	{
-		std::vector<float> toAddValues = toAdd.getValues();
+		std::vector<float> const &toAddValues = toAdd.getValues();
 		for (size_t i = 0; i != mySize; i++)
 			_values[i] += toAddValues[i];
 	}
 }
-/*
+
 void	Vector::sub(Vector const &toSub)
 {
 	size_t	mySize = this->size();
+
 	if (mySize == 0)
 	{
 		_values = toSub.getValues();
-		
-	else if (toAdd->size() == 0)
+		this->opposite();
+	}
+	else if (toSub.size() == 0)
 		return;
-	else if (mySize != toAdd->size())
-		std::cout << "Error\nYou can not sum " << *this << " and " << toAdd " : vectors must have the same size to be added" << std::endl;
+	else if (mySize != toSub.size())
+		std::cout << "Error\nYou can not subtract " << *this << " and " << toSub << " : vectors must be of the same size" << std::endl;
 	else
 	{
-		toAddValues = toAdd.getValues();
-		for (i = 0; i++; i != mySize)
-			_values[i] += toAddValues[i];
+		std::vector<float> const &toSubValues = toSub.getValues();
+		for (size_t i = 0; i != mySize; i++)
+			_values[i] -= toSubValues[i];
 	}
-}*/
+}
