@@ -3,8 +3,13 @@
 
 int main(void)
 {
-	Vector a({0, 1});
+	Vector a;
 	Vector b({-4, 5});
-	a.sub(b);
-	std::cout << a << std::endl;
+	a.scale(5.2);
+	try{
+		std::cout << a(0) << std::endl;}
+	catch (...)
+	{
+		std::cout << "oops" << std::endl;
+	}
 }

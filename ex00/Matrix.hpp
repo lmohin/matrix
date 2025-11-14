@@ -37,8 +37,8 @@ class Matrix
 
 	private:
 		std::Matrix<float> _values;
-		size_t	rows;
-		size_t	cols;
+		size_t	_rows;
+		size_t	_cols;
 };
 
 std::ostream	&operator<<(std::ostream &os, Matrix const &toPrint);
