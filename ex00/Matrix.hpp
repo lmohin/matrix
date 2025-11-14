@@ -1,0 +1,46 @@
+#ifndef MATRIX_HPP
+# define MATRIX_HPP
+# include <vector>
+# include <iostream>
+
+class Matrix
+{
+	public:
+		Matrix(void);
+		Matrix(Matrix const &toCopy);
+		Matrix(std::vector<float> const &toStock, size_t rows, size_t cols);
+		Matrix(size_t rows, size_t cols);
+
+		Matrix	const &operator=(Matrix const &toCopy) const;
+
+		~Matrix(void);
+
+		std::vector<float>	const &getValues() const;
+		
+		float const	&operator()(size_t row, size_t col) const;
+		float		&operator()(size_t row, size_t col);
+
+		Matrix	getOppositeMatrix() const;
+
+		std::pair<float, float>	shape() const;
+		
+		//Matrix		const &getAsMatrix() const;
+
+		bool	isNull() const;
+		bool	isId() const;
+
+		void	opposite(void);
+		void	add(Matrix const &toAdd);
+		void	sub(Matrix const &toSub);
+		void	scale(float const &scalar);
+
+
+	private:
+		std::Matrix<float> _values;
+		size_t	rows;
+		size_t	cols;
+};
+
+std::ostream	&operator<<(std::ostream &os, Matrix const &toPrint);
+
+#endif
