@@ -36,6 +36,20 @@ std::vector<float>	const &Vector::getValues() const
 	return _values;
 }
 
+float const	&Vector::operator()(size_t index) const
+{
+	if (index + 1 > this->size())
+		throw std::out_of_range("index is out of range");
+	return _values[index];
+}
+
+float	&Vector::operator()(size_t index)
+{
+	if (index + 1 > this->size())
+		throw std::out_of_range("index is out of range");
+	return _values[index];
+}
+
 Vector	Vector::getOppositeVector() const
 {
 	Vector oppositeVector(*this);

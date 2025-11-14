@@ -18,6 +18,9 @@ class Vector
 		
 		Vector	getOppositeVector() const;
 
+		float &operator()(size_t index);
+		float const &operator()(size_t index) const;
+
 		size_t	size() const;
 		
 		//Matrix		const &getAsMatrix() const;
