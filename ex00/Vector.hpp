@@ -1,8 +1,10 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
+# include "Matrix.hpp"
 # include <vector>
 # include <iostream>
 
+class Matrix;
 class Vector
 {
 	public:
@@ -23,7 +25,7 @@ class Vector
 
 		size_t	size() const;
 		
-		//Matrix		const &getAsMatrix() const;
+		Matrix	getAsMatrix() const;
 
 		bool	isNull() const;
 		bool	isId() const;

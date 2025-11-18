@@ -58,6 +58,11 @@ Vector	Vector::getOppositeVector() const
 	return (oppositeVector);
 }
 
+Matrix	Vector::getAsMatrix() const
+{
+	return Matrix(_values, _values.size(), 1);
+}
+
 size_t	Vector::size() const
 {
 	return _values.size();

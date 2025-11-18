@@ -1,7 +1,10 @@
 #ifndef MATRIX_HPP
 # define MATRIX_HPP
+# include "Vector.hpp"
 # include <vector>
 # include <iostream>
+
+class Vector;
 
 class Matrix
 {
@@ -24,7 +27,7 @@ class Matrix
 
 		std::pair<float, float>	shape() const;
 		
-		//Matrix		const &getAsMatrix() const;
+		Vector	getAsVector() const;
 
 		bool	isNull() const;
 		bool	isId() const;

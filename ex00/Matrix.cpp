@@ -72,6 +72,11 @@ std::pair<float, float>	Matrix::shape() const
 	return (std::make_pair(_rows, _cols));
 }
 
+Vector	Matrix::getAsVector() const
+{
+	return Vector(_values);
+}
+
 bool	Matrix::isNull() const
 {
 	if (_values.size() == 0)
