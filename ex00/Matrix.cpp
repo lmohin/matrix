@@ -20,6 +20,8 @@ Matrix::Matrix(std::vector<float> const &toStock, size_t rows, size_t cols)
 {
 	if (rows == 0 && toStock.size() != 0)
 		throw std::invalid_argument("invalid shapes");
+	if (rows == 0)
+		return;
 	if (_values.size() / rows != cols)
 		throw std::invalid_argument("invalid shapes");
 	return;
@@ -65,7 +67,7 @@ Matrix	Matrix::getOppositeMatrix() const
 	return (oppositeMatrix);
 }
 
-std::pair<float, float>	Matrix::size() const
+std::pair<float, float>	Matrix::shape() const
 {
 	return (_rows, _cols);
 }
