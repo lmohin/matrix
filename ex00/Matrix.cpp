@@ -10,7 +10,7 @@ Matrix::Matrix(void)
 }
 
 Matrix::Matrix(Matrix const &toCopy)
-: _values(toCopy.getValues()), _rows(toCopy.shape()[0]), _cols(toCopy.shape()[1])
+: _values(toCopy.getValues()), _rows(toCopy.shape().first), _cols(toCopy.shape().second)
 {
 	return;
 }
@@ -43,18 +43,18 @@ std::vector<float>	const &Matrix::getValues() const
 
 float const	&Matrix::operator()(size_t row, size_t col) const
 {
-	if (row + 1 > this->shape()[0])
+	if (row + 1 > _rows)
 		throw std::out_of_range("row is out of range");
-	if (col + 1 > this->shape()[1])
+	if (col + 1 > _cols)
 		throw std::out_of_range("col is out of range");
 	return _values[_cols * row + col];
 }
 
 float 		&Matrix::operator()(size_t row, size_t col)
 {
-	if (row + 1 > this->shape()[0])
+	if (row + 1 > _rows)
 		throw std::out_of_range("row is out of range");
-	if (col + 1 > this->shape()[1])
+	if (col + 1 > _cols)
 		throw std::out_of_range("col is out of range");
 	return _values[_cols * row + col];
 }
@@ -69,7 +69,7 @@ Matrix	Matrix::getOppositeMatrix() const
 
 std::pair<float, float>	Matrix::shape() const
 {
-	return (_rows, _cols);
+	return (std::make_pair(_rows, _cols));
 }
 
 bool	Matrix::isNull() const
@@ -84,11 +84,13 @@ bool	Matrix::isId() const
 	if (_rows != _cols || _rows == 0)
 		return false;
 	for (size_t i = 0; i != _rows; i++)
-		if ((*this)(i, j) != 1)
+	{
+		if ((*this)(i, i) != 1)
 			return false;
 		for (size_t j = 0; j != _cols; j++)
 			if (i != j && (*this)(i, j) != 0)
 				return false;
+	}
 	return true;
 }
 
@@ -96,14 +98,17 @@ bool	Matrix::isId() const
 
 std::ostream	&operator<<(std::ostream &os, Matrix const &toPrint)
 {
+	std::pair<float, float>	matrixShape = toPrint.shape();
 	os << "(";
-	for (size_t j = 0; j != _cols; j++)
+	for (size_t j = 0; j != matrixShape.second; j++)
 	{
 		os << "(";
-		for (size_t i = 0; i != _rows; i++)
-			os << (*this)(i, j);
-			if (i + 1 != _rows)
+		for (size_t i = 0; i != matrixShape.first; i++)
+		{
+			os << toPrint(i, j);
+			if (i + 1 != matrixShape.first)
 				os << " , ";
+		}
 		os << ")";
 	}
 	os << ")";
@@ -120,23 +125,24 @@ void	Matrix::opposite(void)
 
 void	Matrix::add(Matrix const &toAdd)
 {
-	otherShape = toAdd.shape();
-	otherValues = toAdd.getValues();
-	if (_rows != otherShape[0] || _cols != otherShape[1])
+	std::pair<float, float>		toAddShape = toAdd.shape();
+	std::vector<float> const	&toAddValues = toAdd.getValues();
+
+	if (_rows != toAddShape.first || _cols != toAddShape.second)
 		std::cout << "Error\nYou can not sum " << *this << " and " << toAdd << " : matrix must be of the same shape" << std::endl;
 	else
 	{
 		for (size_t i = 0; i != _values.size(); i++)
-			_values[i] += otherValues[i];
+			_values[i] += toAddValues[i];
 	}
 }
 
 void	Matrix::sub(Matrix const &toSub)
 {
-	toSubShape = toSub.shape();
-	toSubValues = toSub.getValues();
-	if (_rows != otherShape[0] || _cols != toSubShape[1])
-		std::cout << "Error\nYou can not sub " << toAdd << " to " << *this << " : matrix must be of the same shape" << std::endl;
+	std::pair<float, float>		toSubShape = toSub.shape();
+	std::vector<float> const 	&toSubValues = toSub.getValues();
+	if (_rows != toSubShape.first || _cols != toSubShape.second)
+		std::cout << "Error\nYou can not sub " << toSub << " to " << *this << " : matrix must be of the same shape" << std::endl;
 	else
 	{
 		for (size_t i = 0; i != _values.size(); i++)

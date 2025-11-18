@@ -36,7 +36,7 @@ class Matrix
 
 
 	private:
-		std::Matrix<float> _values;
+		std::vector<float> _values;
 		size_t	_rows;
 		size_t	_cols;
 };
