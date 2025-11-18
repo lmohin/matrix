@@ -11,6 +11,7 @@ class Vector
 		Vector(void);
 		Vector(Vector const &toCopy);
 		Vector(std::vector<float> const &toStock);
+		Vector(size_t size);
 
 		Vector	const &operator=(Vector const &toCopy) const;
 

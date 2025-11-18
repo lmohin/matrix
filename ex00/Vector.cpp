@@ -14,6 +14,12 @@ Vector::Vector(Vector const &toCopy)
 	return;
 }
 
+Vector::Vector(size_t size)
+: _values(std::vector<float>(size, 0))
+{
+	return;
+}
+
 /*Copy overload*/
 
 Vector::Vector(std::vector<float> const &toStock)
