@@ -124,32 +124,27 @@ void	Matrix::add(Matrix const &toAdd)
 	otherValues = toAdd.getValues();
 	if (_rows != otherShape[0] || _cols != otherShape[1])
 		std::cout << "Error\nYou can not sum " << *this << " and " << toAdd << " : matrix must be of the same shape" << std::endl;
-	for (size_t i = 0; i != _values.size(); i++)
-		_values[i] += otherValues[i];
-}
-
-void	Vector::sub(Vector const &toSub)
-{
-	size_t	mySize = this->size();
-
-	if (mySize == 0)
-	{
-		_values = toSub.getValues();
-		this->opposite();
-	}
-	else if (toSub.size() == 0)
-		return;
-	else if (mySize != toSub.size())
-		std::cout << "Error\nYou can not subtract " << *this << " and " << toSub << " : vectors must be of the same size" << std::endl;
 	else
 	{
-		std::vector<float> const &toSubValues = toSub.getValues();
-		for (size_t i = 0; i != mySize; i++)
+		for (size_t i = 0; i != _values.size(); i++)
+			_values[i] += otherValues[i];
+	}
+}
+
+void	Matrix::sub(Matrix const &toSub)
+{
+	toSubShape = toSub.shape();
+	toSubValues = toSub.getValues();
+	if (_rows != otherShape[0] || _cols != toSubShape[1])
+		std::cout << "Error\nYou can not sub " << toAdd << " to " << *this << " : matrix must be of the same shape" << std::endl;
+	else
+	{
+		for (size_t i = 0; i != _values.size(); i++)
 			_values[i] -= toSubValues[i];
 	}
 }
 
-void	Vector::scale(float const &scalar)
+void	Matrix::scale(float const &scalar)
 {
 	for (std::vector<float>::iterator it = _values.begin(); it != _values.end(); it++)
 		*it *= scalar;
