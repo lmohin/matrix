@@ -105,11 +105,7 @@ void	Vector::add(Vector const &toAdd)
 {
 	size_t	mySize = this->size();
 
-	if (mySize == 0)
-		_values = toAdd.getValues();
-	else if (toAdd.size() == 0)
-		return;
-	else if (mySize != toAdd.size())
+	if (mySize != toAdd.size())
 		std::cout << "Error\nYou can not sum " << *this << " and " << toAdd << " : vectors must be of the same size" << std::endl;
 	else
 	{
@@ -123,14 +119,7 @@ void	Vector::sub(Vector const &toSub)
 {
 	size_t	mySize = this->size();
 
-	if (mySize == 0)
-	{
-		_values = toSub.getValues();
-		this->opposite();
-	}
-	else if (toSub.size() == 0)
-		return;
-	else if (mySize != toSub.size())
+	if (mySize != toSub.size())
 		std::cout << "Error\nYou can not subtract " << *this << " and " << toSub << " : vectors must be of the same size" << std::endl;
 	else
 	{
