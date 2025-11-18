@@ -47,7 +47,7 @@ float const	&Matrix::operator()(size_t row, size_t col) const
 		throw std::out_of_range("row is out of range");
 	if (col + 1 > _cols)
 		throw std::out_of_range("col is out of range");
-	return _values[_cols * row + col];
+	return _values[_rows * col + row];
 }
 
 float 		&Matrix::operator()(size_t row, size_t col)
@@ -56,7 +56,7 @@ float 		&Matrix::operator()(size_t row, size_t col)
 		throw std::out_of_range("row is out of range");
 	if (col + 1 > _cols)
 		throw std::out_of_range("col is out of range");
-	return _values[_cols * row + col];
+	return _values[_rows * col + row];
 }
 
 Matrix	Matrix::getOppositeMatrix() const
@@ -107,7 +107,7 @@ std::ostream	&operator<<(std::ostream &os, Matrix const &toPrint)
 		{
 			os << toPrint(i, j);
 			if (i + 1 != matrixShape.first)
-				os << " , ";
+				os << ",";
 		}
 		os << ")";
 	}
