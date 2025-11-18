@@ -120,7 +120,7 @@ void	Vector::sub(Vector const &toSub)
 	size_t	mySize = this->size();
 
 	if (mySize != toSub.size())
-		std::cout << "Error\nYou can not subtract " << *this << " and " << toSub << " : vectors must be of the same size" << std::endl;
+		std::cout << "Error\nYou can not sub " << toSub << " to " << *this << " : vectors must be of the same size" << std::endl;
 	else
 	{
 		std::vector<float> const &toSubValues = toSub.getValues();
