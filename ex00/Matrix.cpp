@@ -27,6 +27,33 @@ Matrix::Matrix(std::vector<float> const &toStock, size_t rows, size_t cols)
 	return;
 }
 
+Matrix::Matrix(std::vector<Vector> const &vectors)
+{
+	if (vectors.empty())
+	{
+		_rows = 0;
+		_cols = 0;
+		return;
+	}
+	size_t	tmpRows = vectors[0].size();
+	for (std::vector<Vector>::const_iterator it = vectors.begin(); it != vectors.end(); it++)
+	{
+		if (it->size() != tmpRows)
+			throw std::invalid_argument("All vectors must have the same size to create a matrix");
+		_values.insert(_values.end(), it->getValues().begin(), it->getValues().end());
+	}
+	_rows = tmpRows;
+	_cols = vectors.size();
+}
+
+Matrix::Matrix(size_t rows, size_t cols)
+: _rows(rows), _cols(cols)
+{
+	if (SIZE_MAX / rows < cols)
+		throw std::invalid_argument("Matrix is too big to be created, overflow detected");
+	_values = std::vector<float>(rows * cols, 0);
+}
+
 /*Destructor*/
 
 Matrix::~Matrix(void)
