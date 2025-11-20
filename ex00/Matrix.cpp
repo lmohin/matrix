@@ -142,9 +142,27 @@ std::ostream	&operator<<(std::ostream &os, Matrix const &toPrint)
 				os << ",";
 		}
 		os << ")";
+		if (j + 1 != matrixShape.second)
+			os << " ";
 	}
 	os << ")";
 	return os;
+}
+
+void	Matrix::show() const
+{
+	std::pair<float, float>	matrixShape = shape();
+	for (size_t i = 0; i != matrixShape.first; i++)
+	{
+		std::cout << "|";
+		for (size_t j = 0; j != matrixShape.second; j++)
+		{
+			std::cout << (*this)(i, j);
+			if (j + 1 != matrixShape.second)
+				std::cout << " , ";
+		}
+		std::cout << "|" << std::endl;
+	}
 }
 
 /*Calculus*/

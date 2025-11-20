@@ -13,6 +13,7 @@ class Matrix
 		Matrix(Matrix const &toCopy);
 		Matrix(std::vector<float> const &toStock, size_t rows, size_t cols);
 		Matrix(size_t rows, size_t cols);
+		Matrix(std::vector<Vector> const &vectors);
 
 		Matrix	const &operator=(Matrix const &toCopy) const;
 
@@ -31,6 +32,8 @@ class Matrix
 
 		bool	isNull() const;
 		bool	isId() const;
+
+		void	show() const;
 
 		void	opposite(void);
 		void	add(Matrix const &toAdd);
