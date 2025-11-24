@@ -1,7 +1,7 @@
 NAME	= tester
-SRC	= main.cpp Matrix.cpp Vector.cpp utils.cpp
+SRC	= main.cpp Matrix.cpp Vector.cpp linearAlgebra.cpp
 OBJ	= $(SRC:%.cpp=%.o)
-HEADERS	= Matrix.hpp Vector.hpp
+HEADERS	= Matrix.hpp Vector.hpp linearAlgebra.hpp
 CC	= c++
 FLAGS	= -Wall -Werror -Wextra
 
