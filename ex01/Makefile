@@ -1,5 +1,5 @@
 NAME	= tester
-SRC	= main.cpp Matrix.cpp Vector.cpp vectorsUtils.cpp
+SRC	= main.cpp Matrix.cpp Vector.cpp utils.cpp
 OBJ	= $(SRC:%.cpp=%.o)
 HEADERS	= Matrix.hpp Vector.hpp
 CC	= c++
