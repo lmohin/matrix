@@ -36,7 +36,7 @@ class Vector
 		void	sub(Vector const &toSub);
 		void	scale(float const &scalar);
 
-		float	dot(Vector const &otherVector);
+		float	dot(Vector const &otherVector) const;
 
 	private:
 		std::vector<float> _values;

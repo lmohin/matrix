@@ -147,7 +147,7 @@ void	Vector::scale(float const &scalar)
 		*it *= scalar;
 }
 
-float	Vector::dot(Vector const &otherVector)
+float	Vector::dot(Vector const &otherVector) const
 {
 	size_t	mySize = this->size();
 	float	result = 0;
