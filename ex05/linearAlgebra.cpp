@@ -50,17 +50,10 @@ Matrix	lerp(Matrix const &u, Matrix const &v, float const &t)
 
 float	angleCos(Vector const &u, Vector const &v)
 {
-	float	uNorm = u.norm();
-	float	vNorm = v.norm();
-
 	if (u.size() != v.size())
 		throw (std::invalid_argument("Vectors must have the same size to evaluate the cosinus of an angle"));
 
 	float	dotProduct = u.dot(v);
-
-	if (uNorm != 0 && FLT_MAX / uNorm < vNorm)
-		throw (std::overflow_error("Error: overflow detected when multiplying norm of two vectors"));
-	
 	float	normProduct = u.norm() * v.norm();
 
 	if (normProduct == 0)
