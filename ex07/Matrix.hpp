@@ -43,6 +43,7 @@ class Matrix
 		Vector	getColVector(size_t const &col) const;
 		std::vector<Vector>	getAllCols() const;
 		Vector	multiply(Vector const &vec) const;
+		Matrix	multiply(Matrix const &mat) const;
 
 	private:
 		std::vector<float> _values;

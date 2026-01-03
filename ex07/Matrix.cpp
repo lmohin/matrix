@@ -237,3 +237,7 @@ Vector	Matrix::multiply(Vector const &vec) const
 	
 	return (linearCombination(getAllCols(), vec.getValues()));
 }
+
+Vector	Matrix::multiply(Vector const &mat) const
+{
+}
