@@ -4,7 +4,10 @@
 #include <iomanip>
 int main(void)
 {
-	Matrix a({2, -2, -2, 2}, 2, 2);
-	Vector c({4, 2});
-	std::cout << a.multiply(c) << std::endl;
+	Matrix a({3, -5, 2, 6, 8, 2, 5, 2, 2, 1, 7, 2, 12, 10, 2, 16, 18, 2}, 3, 6);
+	Vector v({4, 2});
+	Matrix b({2, 1, 1, 1, 1, 1, 4, 2, 1, 1, 1, 7}, 6, 2);
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
+	std::cout << a.multiply(b) << std::endl;
 }

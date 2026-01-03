@@ -215,7 +215,7 @@ Vector	Matrix::getColVector(size_t const &col) const
 	std::vector<float>	colVectorValues;
 	
 	for (size_t i = 0; i != _rows; i++)
-		colVectorValues.push_back((*this)(col, i));
+		colVectorValues.push_back((*this)(i, col));
 	
 	Vector	colVector(colVectorValues);
 	return (colVector);
@@ -232,12 +232,28 @@ std::vector<Vector>	Matrix::getAllCols() const
 
 Vector	Matrix::multiply(Vector const &vec) const
 {
-	if (vec.size() != _rows)
-		throw std::invalid_argument("Error: if matrix shape is (n,p); you can multiply it only with vectors of size p");
+	if (vec.size() != _cols)
+		throw std::invalid_argument("Error: if matrix shape is (n,p) you can multiply it only with vectors of size p");
 	
 	return (linearCombination(getAllCols(), vec.getValues()));
 }
 
-Vector	Matrix::multiply(Vector const &mat) const
+Matrix	Matrix::multiply(Matrix const &mat) const
 {
+	size_t const	matRows = mat.shape().first;
+	size_t const	matCols = mat.shape().second;
+
+	if (_cols != matRows)
+		throw std::invalid_argument("Error: if matrix shape is (n,m) you can multiply it only with matrices of shape (m, p)");
+
+	std::vector<Vector>	newMatrixCols;
+	for (size_t col = 0; col != matCols; col++)
+	{
+		Vector	newCol = this->multiply(mat.getColVector(col));
+		newMatrixCols.push_back(newCol);
+	}
+
+	Matrix	result(newMatrixCols);
+	
+	return result;
 }
