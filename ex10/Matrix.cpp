@@ -328,3 +328,26 @@ void	Matrix::addScaledRow(size_t const &rowToChange, size_t const &rowAdded, flo
 	for (size_t col = 0; col != _cols; col++)
 		(*this)(rowToChange, col) += (*this)(rowAdded, col) * scalar;
 }
+
+void	Matrix::swapToPivot(size_t const &col)
+{
+	if (col >= _cols)
+		throw std::invalid_argument("Error: col exceeds total columns of the matrix");
+}
+
+Matrix	Matrix::gaussianElimination(void) const
+{
+	Matrix	result(*this);
+
+	//plutôt boucler sur les row !!!
+	for (size_t col = 0; col != _cols; col++)
+	{
+		if (col >= _rows)
+			break;
+		result.swapToPivot(col);
+		if (result(col, col) == 0)
+			continue;
+		result.scaleRow(col, 1 / result(col, col));
+	}
+	return (result);
+}

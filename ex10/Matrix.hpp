@@ -55,6 +55,9 @@ class Matrix
 		void	switchRows(size_t const &firstRow, size_t const &secondRow);
 		void	scaleRow(size_t const &row, float const &scalar);
 		void	addScaledRow(size_t const &rowToChange, size_t const &rowAdded, float const &scalar);
+		void	swapToNonNullRow(size_t const &col);
+
+		Matrix	gaussianElimination(void) const;
 
 	private:
 		std::vector<float> _values;
