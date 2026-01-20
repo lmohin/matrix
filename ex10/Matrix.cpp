@@ -209,7 +209,7 @@ void	Matrix::scale(float const &scalar)
 
 Vector	Matrix::getColVector(size_t const &col) const
 {
-	if (col > _cols)
+	if (col >= _cols)
 		throw std::invalid_argument("Error: col exceed the matrix's total columns");
 	
 	std::vector<float>	colVectorValues;
@@ -223,7 +223,7 @@ Vector	Matrix::getColVector(size_t const &col) const
 
 Vector	Matrix::getRowVector(size_t const &row) const
 {
-	if (row > _rows)
+	if (row >= _rows)
 		throw std::invalid_argument("Error: row exceed the matrix's total rows");
 	
 	std::vector<float>	rowVectorValues;
@@ -328,26 +328,39 @@ void	Matrix::addScaledRow(size_t const &rowToChange, size_t const &rowAdded, flo
 	for (size_t col = 0; col != _cols; col++)
 		(*this)(rowToChange, col) += (*this)(rowAdded, col) * scalar;
 }
-
-void	Matrix::swapToPivot(size_t const &col)
+/*
+void	Matrix::swapToPivot(size_t const &row, size_t const &colDone)
 {
-	if (col >= _cols)
-		throw std::invalid_argument("Error: col exceeds total columns of the matrix");
+	if (row >= _rows)
+		throw std::invalid_argument("Error: row exceeds total rows of the matrix");
+	
+}*/
+
+bool	Matrix::colIsPartiallyNull(size_t const &row, size_t const &col) const
+{
+	for (size_t tmpRow = row; tmpRow < _rows; tmpRow++)
+	{
+		if ((*this)(tmpRow, col) != 0)
+			return (false);
+	}
+	return (true);
 }
 
 Matrix	Matrix::gaussianElimination(void) const
 {
 	Matrix	result(*this);
+	size_t	currentCol = 0;
 
-	//plutôt boucler sur les row !!!
-	for (size_t col = 0; col != _cols; col++)
+	for (size_t row = 0; row != _rows; row++)
 	{
-		if (col >= _rows)
+		while (currentCol < _cols && colIsPartiallyNull(row, currentCol))
+			currentCol++;
+		if (currentCol == _cols)
 			break;
-		result.swapToPivot(col);
-		if (result(col, col) == 0)
-			continue;
-		result.scaleRow(col, 1 / result(col, col));
+		std::cout << "things to do here: " << row << " " << currentCol << std::endl;
+		currentCol++;
+		/*result.swapToPivot(row, currentCol);
+		result.scaleRow(col, 1 / result(col, col));*/
 	}
 	return (result);
 }

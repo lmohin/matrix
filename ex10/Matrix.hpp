@@ -57,6 +57,8 @@ class Matrix
 		void	addScaledRow(size_t const &rowToChange, size_t const &rowAdded, float const &scalar);
 		void	swapToNonNullRow(size_t const &col);
 
+		bool	colIsPartiallyNull(size_t const &row, size_t const &col) const;
+
 		Matrix	gaussianElimination(void) const;
 
 	private:
