@@ -18,5 +18,10 @@ int main(void)
 	Matrix a({0, 0, 0, 6, 8, 2, 5, 2, 2, 1, 7, 2, 12, 10, 2, 16, 18, 2}, 3, 6);*/
 	std::cout << a << std::endl;
 	a.show();
-	std::cout << a.gaussianElimination() << std::endl;
+	a.gaussianElimination().show();
+	Matrix b({8, 4, 8, 5, 2.5, 5, -2, 20, 1, 4, 4, 4, 28, -4, 17}, 3, 5);
+	b.show();
+	std::cout << "-----------" << std::endl;
+	std::cout << b.gaussianElimination() << std::endl;
+
 }

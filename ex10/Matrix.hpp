@@ -55,7 +55,7 @@ class Matrix
 		void	switchRows(size_t const &firstRow, size_t const &secondRow);
 		void	scaleRow(size_t const &row, float const &scalar);
 		void	addScaledRow(size_t const &rowToChange, size_t const &rowAdded, float const &scalar);
-		void	swapToNonNullRow(size_t const &col);
+		void	swapToPivot(size_t const &row, size_t const &col);
 
 		bool	colIsPartiallyNull(size_t const &row, size_t const &col) const;
 

@@ -1,6 +1,7 @@
 #include "Matrix.hpp"
 #include "linearAlgebra.hpp"
 #include <algorithm>
+#include "mathsUtils.hpp"
 
 /*Constructors*/
 
@@ -328,13 +329,27 @@ void	Matrix::addScaledRow(size_t const &rowToChange, size_t const &rowAdded, flo
 	for (size_t col = 0; col != _cols; col++)
 		(*this)(rowToChange, col) += (*this)(rowAdded, col) * scalar;
 }
-/*
-void	Matrix::swapToPivot(size_t const &row, size_t const &colDone)
+
+void	Matrix::swapToPivot(size_t const &row, size_t const &col)
 {
 	if (row >= _rows)
 		throw std::invalid_argument("Error: row exceeds total rows of the matrix");
-	
-}*/
+	if (col >= _cols)
+		throw std::invalid_argument("Error: col exceeds total colums of the matrix");
+
+	size_t	rowMaxIndex = row;
+	float	rowMax = maths_utils::abs((*this)(row, col));
+
+	for (size_t rowIndex = row + 1; rowIndex < _rows; rowIndex++)
+	{
+		if (maths_utils::abs((*this)(rowIndex, col)) > rowMax)
+		{
+			rowMaxIndex = rowIndex;
+			rowMax = maths_utils::abs((*this)(rowIndex, col));
+		}
+	}
+	switchRows(rowMaxIndex, row);
+}
 
 bool	Matrix::colIsPartiallyNull(size_t const &row, size_t const &col) const
 {
@@ -353,14 +368,16 @@ Matrix	Matrix::gaussianElimination(void) const
 
 	for (size_t row = 0; row != _rows; row++)
 	{
-		while (currentCol < _cols && colIsPartiallyNull(row, currentCol))
+		while (currentCol < _cols && result.colIsPartiallyNull(row, currentCol))
 			currentCol++;
 		if (currentCol == _cols)
 			break;
-		std::cout << "things to do here: " << row << " " << currentCol << std::endl;
+		result.swapToPivot(row, currentCol);
+		if (result(row, currentCol) != 0)
+			result.scaleRow(row, 1 / result(row, currentCol));
+		for (size_t leftRows = row + 1; leftRows != _rows; leftRows++)
+			result.addScaledRow(leftRows, row, -((result)(leftRows, currentCol)));
 		currentCol++;
-		/*result.swapToPivot(row, currentCol);
-		result.scaleRow(col, 1 / result(col, col));*/
 	}
 	return (result);
 }
