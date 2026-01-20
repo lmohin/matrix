@@ -375,8 +375,11 @@ Matrix	Matrix::gaussianElimination(void) const
 		result.swapToPivot(row, currentCol);
 		if (result(row, currentCol) != 0)
 			result.scaleRow(row, 1 / result(row, currentCol));
-		for (size_t leftRows = row + 1; leftRows != _rows; leftRows++)
-			result.addScaledRow(leftRows, row, -((result)(leftRows, currentCol)));
+		for (size_t rowIndex = 0; rowIndex != _rows; rowIndex++)
+		{
+			if (rowIndex != row)
+				result.addScaledRow(rowIndex, row, -((result)(rowIndex, currentCol)));
+		}
 		currentCol++;
 	}
 	return (result);
