@@ -159,7 +159,10 @@ void	Matrix::show() const
 		std::cout << "|";
 		for (size_t j = 0; j != matrixShape.second; j++)
 		{
-			std::cout << (*this)(i, j);
+			if ((*this)(i, j) == 0)
+				std::cout << 0;
+			else
+				std::cout << (*this)(i, j);
 			if (j + 1 != matrixShape.second)
 				std::cout << " , ";
 		}
