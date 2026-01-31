@@ -392,3 +392,46 @@ Matrix	Matrix::gaussianElimination(void) const
 	}
 	return (result);
 }
+
+Matrix	Matrix::getSubMatrix(size_t const &rowToRemove, size_t const &colToRemove) const
+{
+	std::vector<float>	newValues;
+
+	if (rowToRemove >= _rows || colToRemove >= _cols)
+		throw (std::invalid_argument("rowToRemove and colToRemove must be lower than the matrix shape"));
+	for (size_t i = 0; i != _rows * _cols; i++)
+	{
+		if (i % _cols != rowToRemove && i / _cols != colToRemove)
+			newValues.push_back(_values[i]);
+	}
+
+	Matrix	result(newValues, _cols - 1, _rows - 1);
+	return (result);
+}
+
+float	Matrix::determinant(void) const
+{
+	if (!isSquared())
+		throw(std::logic_error("You can only compute the determinant of squared matrices"));
+	if (_rows > 10)
+		throw(std::logic_error("You can only use determinant method with small matrices"));
+	switch (_rows)
+	{
+		case 0:
+			return (1);
+
+		case 1:
+			return (_values[0]);
+		case 2:
+			return ((*this)(0, 0) * (*this)(1, 1) - (*this)(0, 1) * (*this)(1, 0));
+		default:
+			float	det = 0;
+			int	sign = 1;
+			for (size_t i = 0; i != _rows; i++)
+			{
+				det += sign * (*this)(i, 0) * getSubMatrix(i, 0).determinant();
+				sign *= -1;
+			}
+			return (det);
+	}
+}

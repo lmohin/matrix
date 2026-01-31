@@ -61,7 +61,8 @@ class Matrix
 		bool	colIsPartiallyNull(size_t const &row, size_t const &col) const;
 
 		Matrix	gaussianElimination(void) const;
-	
+		
+		Matrix	getSubMatrix(size_t const &rowToRemove, size_t const &colToRemove) const;
 		float	determinant(void) const;
 
 	private:
