@@ -65,13 +65,15 @@ class Matrix
 		Matrix	getSubMatrix(size_t const &rowToRemove, size_t const &colToRemove) const;
 		float	determinant(void) const;
 
-		Matrix	getAugmentedMatrix(void) const;
 		Matrix	inverse(void) const;
 
 	private:
 		std::vector<float> _values;
 		size_t	_rows;
 		size_t	_cols;
+	
+		Matrix	getAugmentedMatrix(void) const;
+		Matrix	getInverseFromAugmentedMatrix(void) const;
 };
 
 std::ostream	&operator<<(std::ostream &os, Matrix const &toPrint);

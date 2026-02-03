@@ -449,6 +449,17 @@ Matrix	Matrix::getAugmentedMatrix(void) const
 	return (augmentedMatrix);
 }
 
+Matrix	Matrix::getInverseFromAugmentedMatrix(void) const
+{
+	std::vector<Vector>	inverseColumns;
+	
+	for (size_t col = 0; col != _cols / 2; col++)
+		inverseColumns.push_back(this->getColVector(_cols / 2 + col));
+	
+	Matrix	inverseMatrix(inverseColumns);
+	return (inverseMatrix);
+}
+
 Matrix	Matrix::inverse(void) const
 {
 	if (_rows != _cols)
@@ -477,10 +488,6 @@ Matrix	Matrix::inverse(void) const
 		}
 		currentCol++;
 	}
-	std::vector<Vector>	inverseColumns;
-	for (size_t col = 0; col != _cols; col++)
-		inverseColumns.push_back(augmentedMatrix.getColVector(_cols + col));
-	Matrix	inverseMatrix(inverseColumns);
-	inverseMatrix.show();
+	Matrix inverseMatrix = augmentedMatrix.getInverseFromAugmentedMatrix();
 	return (inverseMatrix);
 }
